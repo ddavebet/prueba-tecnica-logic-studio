@@ -24,8 +24,8 @@ A continuación, se presentan capturas de ambas aplicaciones para una visualizac
 ### Frontend (Blazor App)
 ![Frontend Blazor App](Screenshots/frontend20241101113607.azurewebsites.net_.png)
 ![Frontend Blazor App](Screenshots/frontend20241101113607.azurewebsites.net_tareas.png)
-![Frontend Blazor App](Screenshots/frontend20241101113607.azurewebsites.net_tareas (1).png)
-![Frontend Blazor App](Screenshots/frontend20241101113607.azurewebsites.net_tareas (2).png)
-![Frontend Blazor App](Screenshots/frontend20241101113607.azurewebsites.net_tareas (3).png)
+![Frontend Blazor App](Screenshots/frontend20241101113607.azurewebsites.net_tareas1.png)
+![Frontend Blazor App](Screenshots/frontend20241101113607.azurewebsites.net_tareas2.png)
+![Frontend Blazor App](Screenshots/frontend20241101113607.azurewebsites.net_tareas3.png)
 
 ---
