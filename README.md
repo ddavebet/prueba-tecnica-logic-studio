@@ -19,9 +19,13 @@ Ambos proyectos han sido desplegados como aplicaciones en Azure para su revisió
 A continuación, se presentan capturas de ambas aplicaciones para una visualización rápida:
 
 ### Backend (Swagger)
-![Backend Swagger](ruta-a-tu-captura-backend.png)
+![Backend Swagger](Screenshots/backend20241101012037.azurewebsites.net_swagger_index.html.png)
 
 ### Frontend (Blazor App)
 ![Frontend Blazor App](Screenshots/frontend20241101113607.azurewebsites.net_.png)
+![Frontend Blazor App](Screenshots/frontend20241101113607.azurewebsites.net_tareas.png)
+![Frontend Blazor App](Screenshots/frontend20241101113607.azurewebsites.net_tareas (1).png)
+![Frontend Blazor App](Screenshots/frontend20241101113607.azurewebsites.net_tareas (2).png)
+![Frontend Blazor App](Screenshots/frontend20241101113607.azurewebsites.net_tareas (3).png)
 
 ---
