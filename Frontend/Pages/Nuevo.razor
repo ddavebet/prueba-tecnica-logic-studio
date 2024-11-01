@@ -1,0 +1,57 @@
+﻿@page "/tareas/nuevo"
+@using Frontend.DTOs
+@using Frontend.Services
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+@inject TareaService TareaService
+@inject NavigationManager Navigation
+
+<h3>Crear Tarea</h3>
+
+<EditForm Model="@tarea" OnValidSubmit="AddTarea" class="container mt-3 p-4 shadow-lg rounded bg-light">
+    <DataAnnotationsValidator />
+    <ValidationSummary class="alert alert-danger" />
+
+    <div class="mb-3">
+        <label for="titulo" class="form-label">Título:</label>
+        <InputText id="titulo" class="form-control" @bind-Value="tarea.Titulo" />
+    </div>
+
+    <div class="mb-3">
+        <label for="descripcion" class="form-label">Descripción:</label>
+        <InputText id="descripcion" class="form-control" @bind-Value="tarea.Descripcion" />
+    </div>
+
+    <div class="mb-3">
+        <label for="fechaCreacion" class="form-label">Fecha de Creación:</label>
+        <InputDate id="fechaCreacion" class="form-control" @bind-Value="tarea.FechaCreacion" />
+    </div>
+
+    <div class="mb-3">
+        <label for="fechaVencimiento" class="form-label">Fecha de Vencimiento:</label>
+        <InputDate id="fechaVencimiento" class="form-control" @bind-Value="tarea.FechaVencimiento" />
+    </div>
+
+    <div class="mb-3 form-check">
+        <InputCheckbox id="completada" class="form-check-input" @bind-Value="tarea.Completada" />
+        <label for="completada" class="form-check-label">Completada</label>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">Guardar</button>
+</EditForm>
+
+@code {
+    private TareaDto tarea = new TareaDto();
+
+    protected override void OnInitialized()
+    {
+        tarea.FechaCreacion = DateTime.Now;
+        tarea.FechaVencimiento = DateTime.Now;
+    }
+
+    private async Task AddTarea()
+    {
+        await TareaService.AddAsync(tarea);
+        Navigation.NavigateTo("/tareas");
+    }
+}

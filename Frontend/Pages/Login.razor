@@ -1,0 +1,55 @@
+﻿@page "/"
+@using Blazored.LocalStorage
+@using Frontend.DTOs
+@using Frontend.Services
+@using Microsoft.AspNetCore.Components.Authorization
+@inject AuthService AuthService
+@inject NavigationManager Navigation
+
+<h3>Login</h3>
+
+<EditForm Model="loginDto" OnValidSubmit="HandleLogin" class="p-4 border rounded bg-light">
+    <DataAnnotationsValidator />
+    <ValidationSummary class="alert alert-danger" />
+
+    <div class="mb-3">
+        <label for="nombreUsuario" class="form-label">Nombre de usuario</label>
+        <InputText id="nombreUsuario" @bind-Value="loginDto.Nombre" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label for="contrasena" class="form-label">Contraseña</label>
+        <InputText id="contrasena" @bind-Value="loginDto.Contrasena" type="password" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Iniciar sesión</button>
+
+    @if (!string.IsNullOrEmpty(mensaje))
+    {
+        <div class="alert alert-danger mt-3">@mensaje</div>
+    }
+
+</EditForm>
+
+@code {
+    private LoginDto loginDto = new();
+    private string mensaje;
+
+    protected override void OnInitialized()
+    {
+        loginDto.Nombre = "admin";
+        loginDto.Contrasena = "admin";
+    }
+
+    private async Task HandleLogin()
+    {
+        bool autenticado = await AuthService.LoginAsync(loginDto);
+
+        if (autenticado)
+        {
+            Navigation.NavigateTo("/tareas");
+        }
+        else
+        {
+            mensaje = "Nombre de usuario o contraseña incorrectos.";
+        }
+    }
+}

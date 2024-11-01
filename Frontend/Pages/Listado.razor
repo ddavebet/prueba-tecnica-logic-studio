@@ -1,0 +1,87 @@
+﻿@page "/tareas"
+@using Frontend.DTOs
+@using Frontend.Services
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+@inject TareaService TareaService
+@inject NavigationManager Navigation
+
+<h3>Lista de Tareas Pendientes</h3>
+
+<table class="table table-hover table-bordered mt-3">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">Título</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Fecha de Creación</th>
+            <th scope="col">Fecha de Vencimiento</th>
+            <th scope="col">Completada</th>
+            <th scope="col">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (tareas != null && tareas.Any())
+        {
+            @foreach (var tarea in tareas)
+            {
+                <tr>
+                    <td>@tarea.Titulo</td>
+                    <td>@tarea.Descripcion</td>
+                    <td>@tarea.FechaCreacion.ToShortDateString()</td>
+                    <td>@tarea.FechaVencimiento.ToShortDateString()</td>
+                    <td class="text-center">
+                        <span class="badge @(tarea.Completada ? "bg-success" : "bg-warning")">
+                            @(tarea.Completada ? "Sí" : "No")
+                        </span>
+                    </td>
+                    <td class="text-center">
+                        <button class="btn btn-sm btn-primary me-2" @onclick="() => UpdateTarea(tarea.Id)">
+                            <i class="bi bi-pencil-square"></i> Editar
+                        </button>
+                        <button class="btn btn-sm btn-danger" @onclick="() => MostrarEliminarPopup(tarea.Id)">
+                            <i class="bi bi-trash"></i> Eliminar
+                        </button>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="6" class="text-center">No hay tareas pendientes.</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<EliminarPopup @ref="eliminarPopup" OnConfirm="ConfirmarEliminacion" />
+
+@code {
+    private List<TareaDto> tareas;
+    private EliminarPopup eliminarPopup;
+    private int idParaEliminar;
+
+    protected override async Task OnInitializedAsync()
+    {
+        tareas = await TareaService.GetAllAsync();
+    }
+
+    private void UpdateTarea(int id)
+    {
+        Navigation.NavigateTo("/tareas/editar/" + id);
+    }
+
+    private void MostrarEliminarPopup(int id)
+    {
+        idParaEliminar = id;
+        eliminarPopup.Mostrar();
+    }
+
+    private async Task ConfirmarEliminacion(bool confirmado)
+    {
+        if (confirmado)
+        {
+            await TareaService.DeleteAsync(idParaEliminar);
+            tareas = await TareaService.GetAllAsync();
+        }
+    }
+}
