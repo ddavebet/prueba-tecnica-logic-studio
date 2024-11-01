@@ -14,6 +14,10 @@ Ambos proyectos han sido desplegados como aplicaciones en Azure para su revisió
 - **Backend** (Web API): [Swagger en Azure](https://backend20241101012037.azurewebsites.net/swagger/index.html)
 - **Frontend** (Blazor App): [Aplicación en Azure](https://frontend20241101113607.azurewebsites.net/)
 
+Las credenciales para login son las siguientes:
+- Nombre de usuario: admin 
+- Contraseña: admin
+
 ## Capturas de Pantalla
 
 A continuación, se presentan capturas de ambas aplicaciones para una visualización rápida:
